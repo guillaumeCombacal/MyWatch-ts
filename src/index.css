@@ -1,3 +1,20 @@
 h1 {
     color: red;
 }
+
+button {
+    color: blue;
+}
+
+button.btn-test {
+    color: blue;
+    background-color: aqua;
+}
+
+div.watch-widget{
+    background-color: green;
+}
+
+div.hightlight-timeunit{
+    background-color: magenta;
+}
