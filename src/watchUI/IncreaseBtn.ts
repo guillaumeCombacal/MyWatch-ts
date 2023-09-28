@@ -10,6 +10,8 @@ export class IncreaseBtn extends HtmlBtn {
         this._clickBtnCb = () => {
             this._onIncreaseCb();
         }
+
+        this.addCSSClass('watch-edit-btn');
     }
 
     public setDisable(isDisabled: boolean): void{

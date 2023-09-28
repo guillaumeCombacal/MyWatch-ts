@@ -12,11 +12,42 @@ button.btn-test {
 }
 
 div.watch-widget{
-    background-color: green;
+    background-color:lightgreen;
+    width: 15em;
+    height: 7em;
+}
+
+div.watch-widget .watch-edit-btn{
+    width: 50%;
+    height: 25%;
+}
+
+div.watch-widget .watch-light-btn{
+    width: 100%;
+    height: 25%;
+}
+
+div.watch-widget .time-widget{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+div.watch-widget .time-widget .time-unit{
+    width: 33%;
+    height: 100%;
+    text-align: center;
+    /*font-family: Orbitron-Regular;
+    src: url('./resources/Orbitron-Regular.ttf');*/
+}
+
+div.watch-widget .time-widget .time-unit p{
+    font-size: 150%;
 }
 
 div.hightlight-timeunit{
-    background-color: magenta;
+    background-color:lightgrey;
 }
 
 div.night-mode{

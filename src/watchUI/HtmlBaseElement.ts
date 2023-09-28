@@ -11,11 +11,11 @@ export abstract class HtmlBaseElement <T extends HTMLElement> {
     }
 
     public addCSSClass(className: string): void {
-        this._htmlElement.className = className;
+        this._htmlElement.classList.add(className);
     }
 
-    public removeCSSClass(): void {
-        this._htmlElement.className = '';
+    public removeCSSClass(className: string): void {
+        this._htmlElement.classList.remove(className);
     }
 
 }

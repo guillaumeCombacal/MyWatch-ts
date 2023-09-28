@@ -18,6 +18,8 @@ export class ModeBtn extends HtmlBtn {
             this._currentMode = this._currentMode === 2 ? EditMode.NONE : this._currentMode + 1;
             this._onChangeModeCb(this._currentMode);
         }
+
+        this.addCSSClass('watch-edit-btn');
     }
 
     public getEditMode(): EditMode{

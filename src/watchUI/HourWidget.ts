@@ -2,17 +2,18 @@ import { TimeUnitWidget } from "./TimeUnitWidget";
 
 export class HourWidget extends TimeUnitWidget {
 
-    private _hourLabel: HTMLLabelElement;
+    private _hourLabel: HTMLParagraphElement;
 
     public constructor() {
         super();
 
-        this._hourLabel = document.createElement('label');
+        this._hourLabel = document.createElement('p');
         this._htmlElement.appendChild(this._hourLabel);
     }
 
     public setTime(hour: number): void {
-        this._hourLabel.innerHTML = hour.toString() + ' h';
+        const displayHour: string = hour < 10 ? '0' + hour.toString() : hour.toString();
+        this._hourLabel.innerHTML = displayHour + ' :';
     }
 
 }

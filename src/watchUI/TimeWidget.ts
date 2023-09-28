@@ -22,6 +22,7 @@ export class TimeWidget extends Observer<TimeObservableData> {
         this._divContent = document.createElement('div');
         this._initTimeComponents();
         watchTime.registerObserver(this);
+        this._divContent.className = 'time-widget';
     }
 
     public getHtmlElement(): HTMLDivElement {
@@ -58,9 +59,9 @@ export class TimeWidget extends Observer<TimeObservableData> {
 
     public removeHighlight(): void{
         
-        this._hourWidget.removeCSSClass();
-        this._minuteWidget.removeCSSClass();
-        this._secondWidget.removeCSSClass();
+        this._hourWidget.removeCSSClass('hightlight-timeunit');
+        this._minuteWidget.removeCSSClass('hightlight-timeunit');
+        this._secondWidget.removeCSSClass('hightlight-timeunit');
     }
 
     public increaseUnitTime(unit: TimeUnit): void{
@@ -77,11 +78,11 @@ export class TimeWidget extends Observer<TimeObservableData> {
     }
 
     public addCSSClass(className: string): void {
-        this._divContent.className = className;
+        this._divContent.classList.add(className);
     }
 
-    public removeCSSClass(): void {
-        this._divContent.className = '';
+    public removeCSSClass(className: string): void {
+        this._divContent.classList.remove(className);
     }
 
     public update(data: TimeObservableData): void {

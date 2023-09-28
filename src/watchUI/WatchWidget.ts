@@ -54,13 +54,13 @@ export class WatchWidget {
 
         this._lightBtn.setOnLightModeCb((isNightMode: boolean) => {
 
-            isNightMode ? this._timewidget.addCSSClass('night-mode') : this._timewidget.removeCSSClass();
+            isNightMode ? this._timewidget.addCSSClass('night-mode') : this._timewidget.removeCSSClass('night-mode');
         });
 
         this._divContent.appendChild(this._modeBtn.getHtmlElement());
         this._divContent.appendChild(this._increaseBtn.getHtmlElement());
-        this._divContent.appendChild(this._lightBtn.getHtmlElement());
         this._divContent.appendChild(this._timewidget.getHtmlElement());
+        this._divContent.appendChild(this._lightBtn.getHtmlElement());
     }
 
 
