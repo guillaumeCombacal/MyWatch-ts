@@ -76,6 +76,14 @@ export class TimeWidget extends Observer<TimeObservableData> {
         }
     }
 
+    public addCSSClass(className: string): void {
+        this._divContent.className = className;
+    }
+
+    public removeCSSClass(): void {
+        this._divContent.className = '';
+    }
+
     public update(data: TimeObservableData): void {
         this._updateTime(data.hour, data.minute, data.second);
     }
