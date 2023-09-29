@@ -1,8 +1,8 @@
+import { Observer } from "../../watchModel/Observer";
+import { TimeObservableData, WatchTime } from "../../watchModel/WatchTime";
 import { HourWidget } from "./HourWidget";
 import { MinuteWidget } from "./MinuteWidget";
-import { Observer } from "./Observer";
 import { SecondWidget } from "./SecondWidget";
-import { TimeObservableData, WatchTime } from "./WatchTime";
 
 export enum TimeUnit {
     HOUR = 0,

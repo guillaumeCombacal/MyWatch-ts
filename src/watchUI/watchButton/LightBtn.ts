@@ -1,4 +1,4 @@
-import { HtmlBtn } from "./HtmlBtn";
+import { HtmlBtn } from "../htmlComponent/HtmlBtn";
 
 export class LightBtn extends HtmlBtn {
 

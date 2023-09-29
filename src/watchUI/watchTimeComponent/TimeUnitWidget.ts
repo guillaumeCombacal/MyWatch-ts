@@ -1,4 +1,4 @@
-import { HtmlBaseElement } from "./HtmlBaseElement";
+import { HtmlBaseElement } from "../htmlComponent/HtmlBaseElement";
 
 export abstract class TimeUnitWidget extends HtmlBaseElement<HTMLDivElement> {
 

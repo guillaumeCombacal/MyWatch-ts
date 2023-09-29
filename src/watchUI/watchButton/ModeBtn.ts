@@ -1,4 +1,4 @@
-import { HtmlBtn } from "./HtmlBtn";
+import { HtmlBtn } from "../htmlComponent/HtmlBtn";
 
 // TODO : bouger dans un repo util/common
 export enum EditMode{

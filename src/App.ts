@@ -1,12 +1,9 @@
-import { WatchWidget } from "./watchUI";
+import { Watch } from "./watchController/Watch";
 
 export class App {
 
     public constructor() {
 
-        const watchWidget = new WatchWidget();
+        const watch = new Watch();
     }
 }
-
-
-
