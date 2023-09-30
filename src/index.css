@@ -1,3 +1,8 @@
+/*@font-face {
+    font-family: "Orbitron-Regular";
+    src: url("./resources/Orbitron-Regular.ttf") format('ttf');
+}*/
+
 h1 {
     color: red;
 }
@@ -37,13 +42,14 @@ div.watch-widget .time-widget{
 div.watch-widget .time-widget .time-unit{
     width: 33%;
     height: 100%;
-    text-align: center;
-    /*font-family: Orbitron-Regular;
-    src: url('./resources/Orbitron-Regular.ttf');*/
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 div.watch-widget .time-widget .time-unit p{
-    font-size: 150%;
+    font-size: 3em;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 div.hightlight-timeunit{

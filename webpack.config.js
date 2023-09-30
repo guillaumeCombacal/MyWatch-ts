@@ -16,6 +16,10 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource'
+      },
     ],
   },
   resolve: {
@@ -24,6 +28,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'resources/[hash][ext][query]'
   },
   plugins: [new HtmlWebpackPlugin({
     title: 'GE Template ts',
