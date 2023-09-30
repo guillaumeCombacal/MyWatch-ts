@@ -10,11 +10,17 @@ export class Watch {
 
     public constructor() {
         this._watchWidget = this._factoryWatchWidget.buildWatchWidget(WatchType.WATCH_HTML, this._watchTime);
+
         this._watchWidget.setOnIncreaseHoursCb(()=>{
             this._watchTime.increaseHourOffset();
         });
+
         this._watchWidget.setOnIncreaseMinutesCb(()=>{
             this._watchTime.increaseMinuteOffset();
+        });
+
+        this._watchWidget.setOnResetCb(()=>{
+            this._watchTime.resetTime();
         });
     }
 

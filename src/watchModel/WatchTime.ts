@@ -56,4 +56,10 @@ export class WatchTime extends Observable<TimeObservableData> {
         this._updateTime();
     }
 
+    public resetTime(){
+        this._offsetHour = 0;
+        this._offsetMinute = 0;
+        this._updateTime();
+    }
+
 }
