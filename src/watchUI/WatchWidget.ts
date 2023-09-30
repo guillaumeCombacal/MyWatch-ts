@@ -1,5 +1,6 @@
 import { WatchTime } from "../watchModel/WatchTime";
 import { IWatchWidget } from "./IWatchWidget";
+import { HtmlDiv } from "./htmlComponent/HtmlDiv";
 import { IncreaseBtn } from "./watchButton/IncreaseBtn";
 import { LightBtn } from "./watchButton/LightBtn";
 import { EditMode, ModeBtn } from "./watchButton/ModeBtn";
@@ -7,10 +8,8 @@ import { ResetBtn } from "./watchButton/ResetBtn";
 import { TimeUnit, TimeWidget } from "./watchTimeComponent/TimeWidget";
 
 
-export class WatchWidget implements IWatchWidget{
+export class WatchWidget extends HtmlDiv implements IWatchWidget{
 
-    private _documentBody;
-    private _divContent: HTMLDivElement;
     private _modeBtn: ModeBtn = new ModeBtn('Mode');
     private _increaseBtn: IncreaseBtn = new IncreaseBtn('Increase');
     private _lightBtn: LightBtn = new LightBtn('Light');
@@ -21,15 +20,11 @@ export class WatchWidget implements IWatchWidget{
     private _onResetCb: ()=>void = ()=>{console.log("_onResetCb not yet initialised")};
 
     public constructor(watchTime: WatchTime) {
-
+        super();
         this._timewidget = new TimeWidget(watchTime);
-        this._documentBody = document.body;
-        this._divContent = document.createElement('div');
-        this._divContent.className = 'watch-widget';
+        this.addCSSClass('watch-widget');
 
         this._initWatch();
-
-        this._documentBody.append(this._divContent);
     }
 
     private _initWatch(): void {
@@ -60,18 +55,18 @@ export class WatchWidget implements IWatchWidget{
 
         this._lightBtn.setOnLightModeCb((isNightMode: boolean) => {
 
-            isNightMode ? this._timewidget.addCSSClass('night-mode') : this._timewidget.removeCSSClass('night-mode');
+            isNightMode ? this._timewidget.getTimeContent().addCSSClass('night-mode') : this._timewidget.getTimeContent().removeCSSClass('night-mode');
         });
 
         this._resetBtn.setOnResetCb(()=>{
             this._onResetCb();
         })
 
-        this._divContent.appendChild(this._modeBtn.getHtmlElement());
-        this._divContent.appendChild(this._increaseBtn.getHtmlElement());
-        this._divContent.appendChild(this._timewidget.getHtmlElement());
-        this._divContent.appendChild(this._lightBtn.getHtmlElement());
-        this._divContent.appendChild(this._resetBtn.getHtmlElement());
+        this.addHtmlElement(this._modeBtn.getHtmlElement());
+        this.addHtmlElement(this._increaseBtn.getHtmlElement());
+        this.addHtmlElement(this._timewidget.getTimeContent().getHtmlElement());
+        this.addHtmlElement(this._lightBtn.getHtmlElement());
+        this.addHtmlElement(this._resetBtn.getHtmlElement());
     }
 
     public setOnIncreaseHoursCb(cb: ()=>void): void{
@@ -86,6 +81,9 @@ export class WatchWidget implements IWatchWidget{
         this._onResetCb = cb;
     }
 
+    public getWatchWidget(): HtmlDiv{
+        return this;
+    }
 
 
 }

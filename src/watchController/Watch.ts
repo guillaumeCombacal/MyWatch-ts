@@ -24,4 +24,8 @@ export class Watch {
         });
     }
 
+    public getWatchWidget(): IWatchWidget{
+        return this._watchWidget;
+    }
+
 }

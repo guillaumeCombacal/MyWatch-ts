@@ -1,9 +1,9 @@
-export abstract class HtmlBaseElement <T extends HTMLElement> {
+export class HtmlBaseElement <T extends HTMLElement> {
 
     protected _htmlElement: T;
 
-    public constructor() {
-
+    public constructor(htmlElement: T) {
+        this._htmlElement = htmlElement;
     }
 
     public getHtmlElement(): T {

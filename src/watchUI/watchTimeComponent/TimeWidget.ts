@@ -1,5 +1,6 @@
 import { Observer } from "../../watchModel/Observer";
 import { TimeObservableData, WatchTime } from "../../watchModel/WatchTime";
+import { HtmlDiv } from "../htmlComponent/HtmlDiv";
 import { HourWidget } from "./HourWidget";
 import { MinuteWidget } from "./MinuteWidget";
 import { SecondWidget } from "./SecondWidget";
@@ -12,28 +13,27 @@ export enum TimeUnit {
 
 export class TimeWidget extends Observer<TimeObservableData> {
 
-    private _divContent: HTMLDivElement;
+    private _divContent: HtmlDiv = new HtmlDiv();
     private _hourWidget: HourWidget = new HourWidget();
     private _minuteWidget: MinuteWidget = new MinuteWidget();
     private _secondWidget: SecondWidget = new SecondWidget();
 
     public constructor(watchTime: WatchTime) {
         super();
-        this._divContent = document.createElement('div');
         this._initTimeComponents();
         watchTime.registerObserver(this);
-        this._divContent.className = 'time-widget';
+        this._divContent.addCSSClass('time-widget');
     }
 
-    public getHtmlElement(): HTMLDivElement {
+    public getTimeContent(): HtmlDiv {
         return this._divContent;
     }
 
     private _initTimeComponents(): void {
 
-        this._divContent.appendChild(this._hourWidget.getHtmlElement());
-        this._divContent.appendChild(this._minuteWidget.getHtmlElement());
-        this._divContent.appendChild(this._secondWidget.getHtmlElement());
+        this._divContent.addHtmlElement(this._hourWidget.getHtmlElement());
+        this._divContent.addHtmlElement(this._minuteWidget.getHtmlElement());
+        this._divContent.addHtmlElement(this._secondWidget.getHtmlElement());
     }
 
     private _updateTime(hours: number, minutes: number, seconds: number): void{
@@ -75,14 +75,6 @@ export class TimeWidget extends Observer<TimeObservableData> {
             case TimeUnit.SECOND:
             default:
         }
-    }
-
-    public addCSSClass(className: string): void {
-        this._divContent.classList.add(className);
-    }
-
-    public removeCSSClass(className: string): void {
-        this._divContent.classList.remove(className);
     }
 
     public update(data: TimeObservableData): void {

@@ -1,6 +1,6 @@
 import { HtmlBaseElement } from "./HtmlBaseElement";
 
-export abstract class HtmlBtn extends HtmlBaseElement<HTMLButtonElement>{
+export class HtmlBtn extends HtmlBaseElement<HTMLButtonElement>{
 
     private _name: string = '';
 
@@ -8,13 +8,16 @@ export abstract class HtmlBtn extends HtmlBaseElement<HTMLButtonElement>{
 
     public constructor(name: string) {
 
-        super();
+        super(document.createElement('button'));
         this._name = name;
-        this._htmlElement = document.createElement('button');
         this._htmlElement.innerHTML = name;
         this._htmlElement.addEventListener("click", () => {
             this._clickBtnCb();
         });
+    }
+
+    public setOnClickCb(cb: ()=>void): void{
+        this._clickBtnCb = cb;
     }
 
 }

@@ -1,11 +1,9 @@
-import { HtmlBaseElement } from "../htmlComponent/HtmlBaseElement";
+import { HtmlText } from "../htmlComponent/HtmlText";
 
-export abstract class TimeUnitWidget extends HtmlBaseElement<HTMLDivElement> {
+export abstract class TimeUnitWidget extends HtmlText {
 
     public constructor() {
-        super();
-
-        this._htmlElement = document.createElement('div');
+        super('');
         this.addCSSClass('time-unit');
     }
 
