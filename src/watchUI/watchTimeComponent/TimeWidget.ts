@@ -1,5 +1,5 @@
 import { Observer } from "../../watchModel/Observer";
-import { TimeObservableData, WatchTime } from "../../watchModel/WatchTime";
+import { WatchTime, WatchTimeObservableData } from "../../watchModel/WatchTime";
 import { HtmlDiv } from "../htmlComponent/HtmlDiv";
 import { HourWidget } from "./HourWidget";
 import { MinuteWidget } from "./MinuteWidget";
@@ -11,7 +11,7 @@ export enum TimeUnit {
     SECOND = 0
 }
 
-export class TimeWidget extends Observer<TimeObservableData> {
+export class TimeWidget implements Observer<WatchTimeObservableData> {
 
     private _divContent: HtmlDiv = new HtmlDiv();
     private _hourWidget: HourWidget = new HourWidget();
@@ -19,7 +19,6 @@ export class TimeWidget extends Observer<TimeObservableData> {
     private _secondWidget: SecondWidget = new SecondWidget();
 
     public constructor(watchTime: WatchTime) {
-        super();
         this._initTimeComponents();
         watchTime.registerObserver(this);
         this._divContent.addCSSClass('time-widget');
@@ -77,7 +76,7 @@ export class TimeWidget extends Observer<TimeObservableData> {
         }
     }
 
-    public update(data: TimeObservableData): void {
+    public update(data: WatchTimeObservableData): void {
         this._updateTime(data.hour, data.minute, data.second);
     }
 

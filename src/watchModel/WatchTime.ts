@@ -1,12 +1,14 @@
 import { Observable, ObservableData } from "./Observable";
+import { Observer } from "./Observer";
+import { Time, TimeObservableData } from "./Time";
 
-export class TimeObservableData extends ObservableData{
+export class WatchTimeObservableData extends ObservableData{
     public hour: number;
     public minute: number;
     public second: number;
 }
 
-export class WatchTime extends Observable<TimeObservableData> {
+export class WatchTime extends Observable<WatchTimeObservableData> implements Observer<TimeObservableData> {
 
     private _currentTime: Date = new Date();
     private _hour: number = 0;
@@ -17,11 +19,18 @@ export class WatchTime extends Observable<TimeObservableData> {
 
     public constructor() {
         super();
+        Time.getInstance().registerObserver(this);
+    }
 
-        setInterval(()=>{
-            this._currentTime = new Date();
-            this._updateTime();
-        }, 1000);
+    private _updateTime(): void{
+
+        this._formatTime();
+
+        const timeData = new WatchTimeObservableData;
+        timeData.hour = this._hour;
+        timeData.minute = this._minute;
+        timeData.second = this._second;
+        this.notifyObservers(timeData);
     }
 
     private _formatTime(): void{
@@ -33,17 +42,6 @@ export class WatchTime extends Observable<TimeObservableData> {
         this._minute = customMinutes - Math.floor(customMinutes / 60)*60;
 
         this._second = this._currentTime.getSeconds();
-    }
-
-    private _updateTime(): void{
-
-        this._formatTime();
-
-        const timeData = new TimeObservableData;
-        timeData.hour = this._hour;
-        timeData.minute = this._minute;
-        timeData.second = this._second;
-        this.notifyObservers(timeData);
     }
 
     public increaseHourOffset(){
@@ -59,6 +57,11 @@ export class WatchTime extends Observable<TimeObservableData> {
     public resetTime(){
         this._offsetHour = 0;
         this._offsetMinute = 0;
+        this._updateTime();
+    }
+
+    public update(data: TimeObservableData): void{
+        this._currentTime = data.date;
         this._updateTime();
     }
 
