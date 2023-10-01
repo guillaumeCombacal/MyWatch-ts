@@ -23,6 +23,10 @@ export class Watch {
         this._watchWidget.setOnResetCb(()=>{
             this._watchTime.resetTime();
         });
+
+        this._watchWidget.setOnSwitchAmPmCb(()=>{
+            this._watchTime.switchFormatAmPm();
+        });
     }
 
     public getWatchWidget(): IWatchWidget{

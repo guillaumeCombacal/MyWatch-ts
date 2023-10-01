@@ -28,14 +28,18 @@ div.watch-manager-header .watch-manager-header-gmt{
 
 div.watch-widget{
     background-color:lightgreen;
-    width: 20em;
+    width: 35em;
     height: 7em;
     display: flex;
     flex-direction: row;
 }
 
+div.watch-widget button{
+    width: 10%;
+}
+
 div.watch-widget .watch-widget-handle{
-    width: 90%;
+    width: 80%;
 }
 
 div.watch-widget .watch-widget-handle .watch-edit-btn{

@@ -1,5 +1,6 @@
 import { WatchTime } from "../watchModel/WatchTime";
 import { IWatchWidget } from "./IWatchWidget";
+import { HtmlBtn } from "./htmlComponent/HtmlBtn";
 import { HtmlDiv } from "./htmlComponent/HtmlDiv";
 import { HtmlText } from "./htmlComponent/HtmlText";
 import { IncreaseBtn } from "./watchButton/IncreaseBtn";
@@ -14,6 +15,7 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
     private _modeBtn: ModeBtn = new ModeBtn('Mode');
     private _increaseBtn: IncreaseBtn = new IncreaseBtn('Increase');
     private _lightBtn: LightBtn = new LightBtn('Light');
+    private _switchAmPmBtn: HtmlBtn = new HtmlBtn('AM/PM');
     private _resetBtn: ResetBtn = new ResetBtn('Reset');
     private _gmtInfo: HtmlText = new HtmlText('');
     private _footerHandleContent: HtmlDiv = new HtmlDiv();
@@ -22,6 +24,7 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
     private _onIncreaseHoursCb: ()=>void = ()=>{console.log("_onIncreaseHoursCb not yet initialised")};
     private _onIncreaseMinutesCb: ()=>void = ()=>{console.log("_onIncreaseMinutesCb not yet initialised")};
     private _onResetCb: ()=>void = ()=>{console.log("_onResetCb not yet initialised")};
+    private _onSwitchAmPmCb: ()=>void = ()=>{console.log("_onSwitchAmPmCb not yet initialised")};
 
     public constructor(watchTime: WatchTime) {
         super();
@@ -71,6 +74,10 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
             this._onResetCb();
         })
 
+        this._switchAmPmBtn.setOnClickCb(()=>{
+            this._onSwitchAmPmCb();
+        });
+
         this._footerHandleContent.addCSSClass('watch-widget-footer');
         this._footerHandleContent.addHtmlElement(this._gmtInfo.getHtmlElement());
         this._footerHandleContent.addHtmlElement(this._resetBtn.getHtmlElement());
@@ -81,6 +88,7 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
         this._watchHandleContent.addHtmlElement(this._footerHandleContent.getHtmlElement());
 
         this.addHtmlElement(this._watchHandleContent.getHtmlElement());
+        this.addHtmlElement(this._switchAmPmBtn.getHtmlElement());
         this.addHtmlElement(this._lightBtn.getHtmlElement());
     }
 
@@ -94,6 +102,10 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
 
     public setOnResetCb(cb: ()=>void): void{
         this._onResetCb = cb;
+    }
+
+    public setOnSwitchAmPmCb(cb: ()=>void): void{
+        this._onSwitchAmPmCb = cb;
     }
 
     public getWatchWidget(): HtmlDiv{

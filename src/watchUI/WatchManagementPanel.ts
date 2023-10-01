@@ -29,6 +29,7 @@ export class WatchManagementPanel extends HtmlDiv{
             i<0 ? gmtOptions.push(i.toString()) : gmtOptions.push('+'+ i.toString());
         }
         this._gmtSelection = new HtmlDropDownList(gmtOptions);
+        this._gmtSelection.selectItemByIndex(12);// GMT+0 by default
         this._gmtPanel.addHtmlElement(this._gmtText.getHtmlElement());
         this._gmtPanel.addHtmlElement(this._gmtSelection.getHtmlElement());
         this._headerPanel.addHtmlElement(this._gmtPanel.getHtmlElement());

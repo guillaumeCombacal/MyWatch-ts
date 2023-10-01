@@ -1,6 +1,7 @@
 import { Observer } from "../../watchModel/Observer";
 import { WatchTime, WatchTimeObservableData } from "../../watchModel/WatchTime";
 import { HtmlDiv } from "../htmlComponent/HtmlDiv";
+import { HtmlText } from "../htmlComponent/HtmlText";
 import { HourWidget } from "./HourWidget";
 import { MinuteWidget } from "./MinuteWidget";
 import { SecondWidget } from "./SecondWidget";
@@ -17,6 +18,7 @@ export class TimeWidget implements Observer<WatchTimeObservableData> {
     private _hourWidget: HourWidget = new HourWidget();
     private _minuteWidget: MinuteWidget = new MinuteWidget();
     private _secondWidget: SecondWidget = new SecondWidget();
+    private _amPmInfo: HtmlText = new HtmlText('');
 
     public constructor(watchTime: WatchTime) {
         this._initTimeComponents();
@@ -33,13 +35,15 @@ export class TimeWidget implements Observer<WatchTimeObservableData> {
         this._divContent.addHtmlElement(this._hourWidget.getHtmlElement());
         this._divContent.addHtmlElement(this._minuteWidget.getHtmlElement());
         this._divContent.addHtmlElement(this._secondWidget.getHtmlElement());
+        this._divContent.addHtmlElement(this._amPmInfo.getHtmlElement());
     }
 
-    private _updateTime(hours: number, minutes: number, seconds: number): void{
+    private _updateTime(hours: number, minutes: number, seconds: number, amPm: string): void{
 
         this._hourWidget.setTime(hours);
         this._minuteWidget.setTime(minutes);
         this._secondWidget.setTime(seconds);
+        this._amPmInfo.setText(amPm);
     }
 
     public setHighlight(timeUnit: TimeUnit): void{
@@ -77,7 +81,7 @@ export class TimeWidget implements Observer<WatchTimeObservableData> {
     }
 
     public update(data: WatchTimeObservableData): void {
-        this._updateTime(data.hour, data.minute, data.second);
+        this._updateTime(data.hour, data.minute, data.second, data.amPm);
     }
 
 }

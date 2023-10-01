@@ -30,4 +30,10 @@ export class HtmlDropDownList extends HtmlBaseElement<HTMLSelectElement>{
         return '';
     }
 
+    public selectItemByIndex(index: number): void{
+        if(index > 0 && index < this._listElements.length){
+            this._htmlElement.selectedIndex = index;
+        }
+    }
+
 }
