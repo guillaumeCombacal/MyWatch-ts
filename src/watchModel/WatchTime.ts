@@ -16,9 +16,11 @@ export class WatchTime extends Observable<WatchTimeObservableData> implements Ob
     private _minute: number = 0;
     private _offsetMinute: number = 0;
     private _second: number = 0;
+    private _offsetGMT: number = 0
 
-    public constructor() {
+    public constructor(gmtOffset: number = 0) {
         super();
+        this._offsetGMT = gmtOffset;
         Time.getInstance().registerObserver(this);
     }
 
@@ -35,7 +37,7 @@ export class WatchTime extends Observable<WatchTimeObservableData> implements Ob
 
     private _formatTime(): void{
 
-        const customHours = this._currentTime.getHours() + this._offsetHour;
+        const customHours = this._currentTime.getHours() + this._offsetGMT + this._offsetHour;
         this._hour = customHours - Math.floor(customHours / 24)*24
 
         const customMinutes = this._currentTime.getMinutes() + this._offsetMinute;
@@ -58,6 +60,10 @@ export class WatchTime extends Observable<WatchTimeObservableData> implements Ob
         this._offsetHour = 0;
         this._offsetMinute = 0;
         this._updateTime();
+    }
+
+    public getGmtOffset(): number{
+        return this._offsetGMT;
     }
 
     public update(data: TimeObservableData): void{

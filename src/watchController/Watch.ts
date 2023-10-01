@@ -6,9 +6,10 @@ export class Watch {
 
     private _watchWidget: IWatchWidget;
     private _factoryWatchWidget: WatchWidgetFactory = new WatchWidgetFactory();
-    private _watchTime = new WatchTime();
+    private _watchTime: WatchTime;
 
-    public constructor() {
+    public constructor(gmtOffset: number = 0) {
+        this._watchTime = new WatchTime(gmtOffset);
         this._watchWidget = this._factoryWatchWidget.buildWatchWidget(WatchType.WATCH_HTML, this._watchTime);
 
         this._watchWidget.setOnIncreaseHoursCb(()=>{

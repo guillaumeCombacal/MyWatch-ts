@@ -12,8 +12,6 @@ export class LightBtn extends HtmlBtn {
             this._toggleNightMode = !this._toggleNightMode;
             this._onLightCb(this._toggleNightMode);
         }
-
-        this.addCSSClass('watch-edit-btn');
     }
 
     public setOnLightModeCb(cb: (isNightMode: boolean)=>void): void{

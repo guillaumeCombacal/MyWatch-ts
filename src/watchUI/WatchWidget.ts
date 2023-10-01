@@ -1,6 +1,7 @@
 import { WatchTime } from "../watchModel/WatchTime";
 import { IWatchWidget } from "./IWatchWidget";
 import { HtmlDiv } from "./htmlComponent/HtmlDiv";
+import { HtmlText } from "./htmlComponent/HtmlText";
 import { IncreaseBtn } from "./watchButton/IncreaseBtn";
 import { LightBtn } from "./watchButton/LightBtn";
 import { EditMode, ModeBtn } from "./watchButton/ModeBtn";
@@ -14,7 +15,10 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
     private _increaseBtn: IncreaseBtn = new IncreaseBtn('Increase');
     private _lightBtn: LightBtn = new LightBtn('Light');
     private _resetBtn: ResetBtn = new ResetBtn('Reset');
+    private _gmtInfo: HtmlText = new HtmlText('');
+    private _footerHandleContent: HtmlDiv = new HtmlDiv();
     private _timewidget: TimeWidget;
+    private _watchHandleContent: HtmlDiv = new HtmlDiv();
     private _onIncreaseHoursCb: ()=>void = ()=>{console.log("_onIncreaseHoursCb not yet initialised")};
     private _onIncreaseMinutesCb: ()=>void = ()=>{console.log("_onIncreaseMinutesCb not yet initialised")};
     private _onResetCb: ()=>void = ()=>{console.log("_onResetCb not yet initialised")};
@@ -23,6 +27,11 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
         super();
         this._timewidget = new TimeWidget(watchTime);
         this.addCSSClass('watch-widget');
+
+        this._watchHandleContent.addCSSClass('watch-widget-handle');
+        const gmtOffset: number = watchTime.getGmtOffset();
+        const gmtInfo: string = gmtOffset < 0 ? gmtOffset.toString() : "+" + gmtOffset.toString();
+        this._gmtInfo.setText("GMT " + gmtInfo);
 
         this._initWatch();
     }
@@ -62,11 +71,17 @@ export class WatchWidget extends HtmlDiv implements IWatchWidget{
             this._onResetCb();
         })
 
-        this.addHtmlElement(this._modeBtn.getHtmlElement());
-        this.addHtmlElement(this._increaseBtn.getHtmlElement());
-        this.addHtmlElement(this._timewidget.getTimeContent().getHtmlElement());
+        this._footerHandleContent.addCSSClass('watch-widget-footer');
+        this._footerHandleContent.addHtmlElement(this._gmtInfo.getHtmlElement());
+        this._footerHandleContent.addHtmlElement(this._resetBtn.getHtmlElement());
+
+        this._watchHandleContent.addHtmlElement(this._modeBtn.getHtmlElement());
+        this._watchHandleContent.addHtmlElement(this._increaseBtn.getHtmlElement());
+        this._watchHandleContent.addHtmlElement(this._timewidget.getTimeContent().getHtmlElement());
+        this._watchHandleContent.addHtmlElement(this._footerHandleContent.getHtmlElement());
+
+        this.addHtmlElement(this._watchHandleContent.getHtmlElement());
         this.addHtmlElement(this._lightBtn.getHtmlElement());
-        this.addHtmlElement(this._resetBtn.getHtmlElement());
     }
 
     public setOnIncreaseHoursCb(cb: ()=>void): void{

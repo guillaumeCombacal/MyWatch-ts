@@ -17,7 +17,7 @@ export class WatchesManager {
     }
 
     private _addNewWatch(): void{
-        const newWatch = new Watch();
+        const newWatch = new Watch(parseInt(this._watchManagementPanel.getGMTOffset()));
         this._watchManagementPanel.addNewWatch(newWatch.getWatchWidget());
         this._watchesList.push(newWatch);
     }
