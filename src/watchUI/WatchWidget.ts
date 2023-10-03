@@ -10,6 +10,10 @@ import { ResetBtn } from "./watchButton/ResetBtn";
 import { TimeUnit, TimeWidget } from "./watchTimeComponent/TimeWidget";
 
 
+/**
+ * The watch widget composed by every widget used to build the wath view
+ * This view is created from HTML elemnts
+ */
 export class WatchWidget extends HtmlDiv implements IWatchWidget{
 
     private _modeBtn: ModeBtn = new ModeBtn('Mode');

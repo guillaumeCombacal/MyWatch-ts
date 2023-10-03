@@ -9,6 +9,13 @@ export class WatchTimeObservableData extends ObservableData{
     public amPm: string;
 }
 
+/**
+ * This class is the data model for a watch.
+ * It get the current time every second from @Time singleton as Date obj and format it in hours, minutes, seconds.
+ * It handles hours and minutes offset
+ * It handles GMT parameter
+ * It can format time as AM/PM format
+ */
 export class WatchTime extends Observable<WatchTimeObservableData> implements Observer<TimeObservableData> {
 
     private _currentTime: Date = new Date();

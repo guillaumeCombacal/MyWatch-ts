@@ -4,6 +4,10 @@ export class TimeObservableData extends ObservableData{
     public date: Date;
 }
 
+/**
+ * This class is a singleton
+ * It is updated every second and notify its observers
+ */
 export class Time extends Observable<TimeObservableData> {
 
     private static _instance: Time | undefined = undefined;

@@ -2,6 +2,10 @@ import { WatchTime } from "../watchModel/WatchTime";
 import { IWatchWidget } from "../watchUI/IWatchWidget";
 import { WatchType, WatchWidgetFactory } from "../watchUI/WatchWidgetFactory";
 
+/**
+ * Class responsible for creation and handling of one watch object
+ * A watch object is composed by a view (widget) and a model (time)
+ */
 export class Watch {
 
     private _watchWidget: IWatchWidget;

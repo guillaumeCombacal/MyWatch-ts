@@ -12,6 +12,9 @@ export enum TimeUnit {
     SECOND = 0
 }
 
+/**
+ * The time widget composed by hours, minutes and second widgets
+ */
 export class TimeWidget implements Observer<WatchTimeObservableData> {
 
     private _divContent: HtmlDiv = new HtmlDiv();
